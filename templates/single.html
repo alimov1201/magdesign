@@ -1,0 +1,203 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+	<link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+	<link rel="stylesheet" href="{% static 'css/glightbox.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/aos.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="https://kit.fontawesome.com/ce484dfc10.js" crossorigin="anonymous"></script>
+	<title>MagDesign &mdash; Free Bootstrap 5 Website Template by Colorlib</title>
+</head>
+
+<body>
+	<div class="site-mobile-menu site-navbar-target">
+		<div class="site-mobile-menu-header">
+			<div class="site-mobile-menu-close">
+				<span class="icofont-close js-menu-toggle"></span>
+			</div>
+		</div>
+		<div class="site-mobile-menu-body"></div>
+	</div>
+	<nav class="site-nav">
+		<div class="container">
+			<div class="site-navigation">
+				<div class="row">
+					<div class="col-md-6 text-center order-1 order-md-2 mb-3 mb-md-0">
+						<a href="{% url 'main' %}" class="logo m-0 text-uppercase">MagDesign</a>
+					</div>
+					<div class="col-md-3 order-3 order-md-1">
+						<form action="{% url 'search_category' %}" class="search-form">
+							<input name="q" type="search" class="form-control" placeholder="Search...">
+						</form>
+					</div>
+					<div class="col-md-3 text-end order-2 order-md-3 mb-3 mb-md-0">
+						<div class="d-flex">
+							<ul class="list-unstyled social me-auto">
+								<li><a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a></li>
+								<li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+								<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></span></a></li>
+							</ul>
+							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block"
+								data-toggle="collapse" data-target="#main-navbar">
+								<span></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<ul class="js-clone-nav d-none d-lg-inline-none text-start site-menu float-end">
+					<li class="active"><a href="{% url 'main' %}">Home</a></li>
+					<li class="has-children">
+						{% for article in all_categories %}
+							<li><a href="{% url 'category' %}?category={{article}}">{{article}}</a></li>
+						{% endfor %}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="section post-section pt-5">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="text-center">
+						<img src="{{article.image.url}}" alt="Image"
+							class="author-pic img-fluid rounded-circle mx-auto">
+					</div>
+					<span class="d-block text-center">{{article.author}}</span>
+					<span class="date d-block text-center small text-uppercase text-black-50 mb-5">{{article.date}}</span>
+					<h2 class="heading text-center">{{article.title}}
+					</h2>
+					<p class="lead mb-4 text-center">{{article.description}}</p>
+					<img src="{{article.image.url}}" alt="Image" class="img-fluid rounded mb-4">
+					<div class="row mt-5 pt-5 border-top">
+						<div class="col-12">
+							<span class="fw-bold text-black small mb-1">Share</span>
+							<ul class="social list-unstyled">
+								<li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+								<li><a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a></li>
+								<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+								<li><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="heading">Related</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				{% for article in art %}
+				<div class="col-lg-12">
+					<div class="post-entry d-md-flex small-horizontal mb-5">
+						<div class="me-md-5 thumbnail mb-3 mb-md-0">
+							<img src="{{article.image.url}}" alt="Image" class="img-fluid">
+						</div>
+						<div class="content">
+							<div class="post-meta mb-3">
+								<a href="{% url 'single' article.pk %}" class="category">{{article.category}}</a>
+								<span class="date">{{article.date}}</span>
+							</div>
+							<h2 class="heading"><a href="{% url 'single' article.pk %}">{{article.title}}</a></h2>
+							<p>{{article.description}}</p>
+							<a href="{% url 'single' article.pk %}" class="post-author d-flex align-items-center">
+								<div class="author-pic">
+									<img src="{{article.image.url}}" alt="Image">
+								</div>
+								<div class="text">
+									<strong>{{article.author}}</strong>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="py-5 bg-light mx-md-3 sec-subscribe">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="h4 fw-bold">Subscribe to newsletter</h2>
+				</div>
+			</div>
+			<form method="post" class="row">
+				{% csrf_token %}
+				<div class="col-md-8">
+					<div class="mb-3 mb-md-0">
+						{{form.mail}}
+					</div>
+				</div>
+				<div class="col-md-4 d-grid">
+					<button type="submit" class="btn btn-primary" value="Subscribe">Subscribe</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="site-footer">
+		<div class="container">
+			<div class="row justify-content-center copyright">
+				<div class="col-lg-7 text-center">
+					<div class="widget">
+						<ul class="social list-unstyled">
+							<li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+							<li><a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a></li>
+							<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+							<li><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></i></a></li>
+						</ul>
+					</div>
+					<div class="widget">
+						<p>Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+							template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank" rel="nofollow noopener">Colorlib</a>
+						</p>
+						<div class="d-block">
+							<a href="{% url 'single' article.id %}" class="m-2">Terms &amp; Conditions</a>/
+							<a href="{% url 'single' article.id %}" class="m-2">Privacy Policy</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="overlayer"></div>
+		<div class="loader">
+			<div class="spinner-border" role="status">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
+		<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'js/tiny-slider.js' %}"></script>
+		<script src="{% static 'js/glightbox.min.js' %}"></script>
+		<script src="{% static 'js/aos.js' %}"></script>
+		<script src="{% static 'js/navbar.js' %}"></script>
+		<script src="{% static 'js/counter.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+
+			gtag('config', 'UA-23581568-13');
+		</script>
+</body>
+
+</html>
